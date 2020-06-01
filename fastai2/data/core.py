@@ -60,10 +60,8 @@ class TfmdDL(DataLoader):
     def new(self, dataset=None, cls=None, **kwargs):
         res = super().new(dataset, cls, do_setup=False, **kwargs)
         if not hasattr(self, '_n_inp') or not hasattr(self, '_types'):
-            try:
-                self._one_pass()
-                res._n_inp,res._types = self._n_inp,self._types
-            except: print("Could not do one pass in your dataloader, there is something wrong in it")
+            self._one_pass()
+            res._n_inp,res._types = self._n_inp,self._types
         else: res._n_inp,res._types = self._n_inp,self._types
         return res
 
